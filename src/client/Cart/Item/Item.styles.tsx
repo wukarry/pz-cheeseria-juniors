@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import {withStyles} from "@material-ui/core/styles";
+import {inspect} from "util";
+import {IconButton, Typography} from "@material-ui/core";
+import MuiDialogContent from "@material-ui/core/DialogContent";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,6 +12,7 @@ export const Wrapper = styled.div`
   border: 1px solid lightblue;
   border-radius: 20px;
   height: 100%;
+  
 
   button {
     border-radius: 0 0 20px 20px;
@@ -24,4 +29,10 @@ export const Wrapper = styled.div`
     padding: 1rem;
     height: 100%;
   }
+   a {
+     display: flex;
+     justify-content: space-between;
+     flex-direction: column;   
+   }
+
 `;
