@@ -12,6 +12,7 @@ import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton, StyledAppBar, HeaderTypography } from './App.styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import HistoryCart from "./Cart/HistoryCart";
 // Types
 export type CartItemType = {
   id: number;
@@ -27,8 +28,10 @@ export type CartItemType = {
 const getCheeses = async (): Promise<CartItemType[]> =>
   await (await fetch(`api/cheeses`)).json();
 
+let historyItems = [];
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const [historyCartOpen, setHistoryCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'cheeses',
@@ -69,6 +72,16 @@ const App = () => {
     );
   };
 
+  const purchaseItems = () =>{
+      setCartOpen(false);
+      setCartItems((prev)=>{
+        historyItems = [...prev];
+        console.log("dddddd");
+        console.log(historyItems);
+      return [];
+    });
+  };
+
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
 
@@ -83,7 +96,7 @@ const App = () => {
             justify="space-between"
             alignItems="center"
           >
-            <StyledButton>
+            <StyledButton onClick={() => setHistoryCartOpen(true)}>
               <RestoreIcon />
               <Typography variant="subtitle2">
                 Recent Purchases
@@ -116,6 +129,16 @@ const App = () => {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
+          purchaseItems={purchaseItems}
+        />
+      </Drawer>
+
+      <Drawer anchor='left' open={historyCartOpen} onClose={() => setHistoryCartOpen(false)}>
+        {
+          console.log("in drawer:"+historyItems)
+        }
+        <HistoryCart
+            cartItems={historyItems}
         />
       </Drawer>
 
