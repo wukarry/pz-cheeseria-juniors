@@ -9,15 +9,12 @@ type Props = {
 };
 
 const HistoryCart: React.FC<Props> = ({ cartItems}) => {
-    console.log("in history cart :")
-    console.log(cartItems);
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount * item.price, 0);
-
   return (
     <Wrapper>
-      <h2>Your Shopping Cart</h2>
-      {cartItems.length === 0 ? <p>No items in cart.</p> : cartItems.map(item => (
+      <h2>Your History Shopping Cart</h2>
+      {cartItems.length === 0 ? <p>No items in history.</p> : cartItems.map(item => (
         <HistoryCartItem
           key={item.id}
           item={item}

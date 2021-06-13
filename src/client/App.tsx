@@ -76,8 +76,6 @@ const App = () => {
       setCartOpen(false);
       setCartItems((prev)=>{
         historyItems = [...prev];
-        console.log("dddddd");
-        console.log(historyItems);
       return [];
     });
   };
@@ -134,9 +132,6 @@ const App = () => {
       </Drawer>
 
       <Drawer anchor='left' open={historyCartOpen} onClose={() => setHistoryCartOpen(false)}>
-        {
-          console.log("in drawer:"+historyItems)
-        }
         <HistoryCart
             cartItems={historyItems}
         />
