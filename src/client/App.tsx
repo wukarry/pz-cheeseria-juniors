@@ -28,7 +28,7 @@ export type CartItemType = {
 const getCheeses = async (): Promise<CartItemType[]> =>
   await (await fetch(`api/cheeses`)).json();
 
-let historyItems = [];
+let historyItems:any[]  = [];
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [historyCartOpen, setHistoryCartOpen] = useState(false);
