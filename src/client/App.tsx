@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { Fragment, useState, useEffect } from 'react';
 import { useQuery, useMutation } from 'react-query';
 // Components
@@ -23,6 +24,7 @@ export type CartItemType = {
   title: string;
   amount: number;
 };
+
 export type HistoryCartItemType = {
   id: number;
   category: string;
@@ -62,11 +64,14 @@ const App = () => {
   const response = useQuery<CartItemType[]>(
       'history',
       getHistory
+
   );
+  console.log('dddddddd');
   if (response['status'] == "success"){
 
     historyItems = response['data'];
   }
+
 
 
   const getTotalItems = (items: CartItemType[]) =>
@@ -109,11 +114,6 @@ const App = () => {
        //sendData(historyItems[0]);
 
 
-
-
-
-
-        console.log('222222222');
       return [];
     });
   };

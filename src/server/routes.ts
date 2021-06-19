@@ -1,6 +1,6 @@
 import * as express from 'express';
-import * as _ from "lodash";
-const fs = require('fs');
+// import * as _ from "lodash";
+// const fs = require('fs');
 const cheeses = require('./data/cheeses.json');
 const history = require('./data/history.json');
 
