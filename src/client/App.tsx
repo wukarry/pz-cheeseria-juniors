@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useQuery, useMutation } from 'react-query';
 // Components
 import Item from './Cart/Item/Item';
 import Cart from './Cart/Cart';
@@ -23,10 +23,26 @@ export type CartItemType = {
   title: string;
   amount: number;
 };
+export type HistoryCartItemType = {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  amount: number;
+};
 
 
 const getCheeses = async (): Promise<CartItemType[]> =>
   await (await fetch(`api/cheeses`)).json();
+
+const getHistory = async (): Promise<HistoryCartItemType[]> =>
+    await (await fetch(`api/history`)).json();
+
+
+
+
 
 let historyItems:any[]  = [];
 const App = () => {
@@ -38,6 +54,20 @@ const App = () => {
     getCheeses
   );
   console.log(data);
+
+
+
+
+  const [historyCartItems, setHistoryCartItems] = useState([] as HistoryCartItemType[]);
+  const response = useQuery<CartItemType[]>(
+      'history',
+      getHistory
+  );
+  if (response['status'] == "success"){
+
+    historyItems = response['data'];
+  }
+
 
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
@@ -76,6 +106,14 @@ const App = () => {
       setCartOpen(false);
       setCartItems((prev)=>{
         historyItems = [...prev];
+       //sendData(historyItems[0]);
+
+
+
+
+
+
+        console.log('222222222');
       return [];
     });
   };
@@ -105,7 +143,7 @@ const App = () => {
               Welcome to Patient Zero's Cheeseria
             </HeaderTypography>
 
-            <StyledButton onClick={() => setCartOpen(true)}>
+            <StyledButton onClick={() => setCartOpen(true)} data-cy={`cart-button`}>
               <Badge
                 badgeContent={getTotalItems(cartItems)}
                 color='error'
