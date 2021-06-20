@@ -124,7 +124,7 @@ const App = () => {
             justify="space-between"
             alignItems="center"
           >
-            <StyledButton data-cy={`purchases-button`} onClick={() => setHistoryCartOpen(true)} >
+            <StyledButton  onClick={() => setHistoryCartOpen(true)} data-cy={`recent-purchases-button`}>
               <RestoreIcon />
               <Typography variant="subtitle2">
                 Recent Purchases

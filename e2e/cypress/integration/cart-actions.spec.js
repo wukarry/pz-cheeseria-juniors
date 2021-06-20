@@ -43,7 +43,7 @@ context('Show Purchases History', () => {
     cy.get('[data-cy=cart-button]').click();
     cy.get('[data-cy=purchase-button]').click();
     cy.visit('/');
-    cy.get('[data-cy=purchases-button]').click();
+    cy.get('[data-cy=recent-purchases-button]').click();
     cy.get('[data-cy=history-drawer]').should('be.visible');
     cy.get('[data-cy=history-item-1]').should('be.visible');
   })
