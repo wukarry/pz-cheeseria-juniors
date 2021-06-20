@@ -42,14 +42,14 @@ const getCheeses = async (): Promise<CartItemType[]> =>
 const getHistory = async (): Promise<HistoryCartItemType[]> =>
     await (await fetch(`api/history`)).json();
 
-
-
-
+// const postHistory = async (): Promise<HistoryCartItemType[]> =>
+//     await (await fetch(`api/history`, {
+//       method : "POST",
+//     })).json();
 
 let historyItems:any[]  = [];
 const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
-  const [historyCartOpen, setHistoryCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'cheeses',
@@ -57,22 +57,17 @@ const App = () => {
   );
   console.log(data);
 
-
-
-
-  const [historyCartItems, setHistoryCartItems] = useState([] as HistoryCartItemType[]);
+  //HistoryCart
+  //const [historyCartItems, setHistoryCartItems] = useState([] as HistoryCartItemType[]);
+  const [historyCartOpen, setHistoryCartOpen] = useState(false);
   const response = useQuery<CartItemType[]>(
       'history',
-      getHistory
-
+      getHistory,
   );
-  console.log('dddddddd');
-  if (response['status'] == "success"){
 
+  if (response['status'] == "success"){
     historyItems = response['data'];
   }
-
-
 
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0);
@@ -111,9 +106,6 @@ const App = () => {
       setCartOpen(false);
       setCartItems((prev)=>{
         historyItems = [...prev];
-       //sendData(historyItems[0]);
-
-
       return [];
     });
   };
