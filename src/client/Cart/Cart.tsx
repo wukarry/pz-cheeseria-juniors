@@ -30,7 +30,8 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart, purchaseI
         <Button
             onClick={ purchaseItems}
             variant="outlined"
-            color="primary">Purchase</Button>
+            color="primary"
+            data-cy={`purchase-button`} >Purchase</Button>
     </Wrapper>
   );
 };

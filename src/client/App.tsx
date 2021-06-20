@@ -124,7 +124,7 @@ const App = () => {
             justify="space-between"
             alignItems="center"
           >
-            <StyledButton onClick={() => setHistoryCartOpen(true)}>
+            <StyledButton data-cy={`purchases-button`} onClick={() => setHistoryCartOpen(true)} >
               <RestoreIcon />
               <Typography variant="subtitle2">
                 Recent Purchases
@@ -152,7 +152,7 @@ const App = () => {
         </Toolbar>
       </StyledAppBar>
 
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
+      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)} data-cy='cart-drawer'>
         <Cart
           cartItems={cartItems}
           addToCart={handleAddToCart}
@@ -161,7 +161,7 @@ const App = () => {
         />
       </Drawer>
 
-      <Drawer anchor='left' open={historyCartOpen} onClose={() => setHistoryCartOpen(false)}>
+      <Drawer anchor='left' open={historyCartOpen} onClose={() => setHistoryCartOpen(false)} data-cy='history-drawer'>
         <HistoryCart
             cartItems={historyItems}
         />

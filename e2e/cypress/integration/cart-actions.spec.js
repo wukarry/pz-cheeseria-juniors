@@ -12,10 +12,11 @@ context('Cart Actions', () => {
 
     cy.get('[data-cy=badge-count]').should('have.text', '2');
 
+    // check Cart items
     cy.get('[data-cy=cart-button]').click();
-
-
-
+    cy.get('[data-cy=cart-drawer]').should('be.visible');
+    cy.get('[data-cy=cart-item-2]').should('be.visible');
+    cy.get('[data-cy=cart-item-3]').should('be.visible');
   })
 
 })
@@ -25,18 +26,26 @@ context('Description Actions', () => {
   })
 
   it('Shows item\'s description card', () => {
-
+    cy.get('[data-cy=cheese-card-2]').click();
+    cy.get('[data-cy=description-dialog]').should('be.visible');
   })
 
 })
 
-context('Description Actions', () => {
+context('Show Purchases History', () => {
   beforeEach(() => {
     cy.visit('/');
   })
 
-  it('Shows item\'s description card', () => {
-
+  it('User\'s purchases history', () => {
+    cy.get('[data-cy=add-to-cart-1]').click();
+    cy.get('[data-cy=add-to-cart-1]').click();
+    cy.get('[data-cy=cart-button]').click();
+    cy.get('[data-cy=purchase-button]').click();
+    cy.visit('/');
+    cy.get('[data-cy=purchases-button]').click();
+    cy.get('[data-cy=history-drawer]').should('be.visible');
+    cy.get('[data-cy=history-item-1]').should('be.visible');
   })
 
 })

@@ -95,7 +95,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart })=>{
 
     return (
     <Wrapper>
-        <a onClick={handleClickOpen}>
+        <a onClick={handleClickOpen} data-cy={`cheese-card-${item.id}`}>
             <img src={item.image} alt={item.title} />
             <div>
                 <h3>{item.title}</h3>
@@ -106,7 +106,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart })=>{
             onClick={() => handleAddToCart(item)}
             data-cy={`add-to-cart-${item.id}`}>Add to cart</Button>
 
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} data-cy={`description-dialog`}>
             <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                 <h3>{item.title}</h3>
             </DialogTitle>

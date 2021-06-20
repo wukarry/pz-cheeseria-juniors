@@ -9,7 +9,7 @@ type Props = {
 };
 
 const HistoryCartItem: React.FC<Props> = ({ item}) => (
-  <Wrapper>
+  <Wrapper data-cy={`history-item-${item.id}`}>
     <div>
       <h3>{item.title}</h3>
       <div className='information'>
